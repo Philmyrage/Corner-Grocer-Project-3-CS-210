@@ -1,9 +1,6 @@
 #pragma once
 
-#include <istream>
-#include <fstream>
-#include <iostream>
-#include <utility>
+#include <iosfwd>
 
 enum class EMenuSelection
 {

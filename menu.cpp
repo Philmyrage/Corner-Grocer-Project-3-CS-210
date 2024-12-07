@@ -10,7 +10,6 @@ void Menu::DisplayMenu()
 							 " 1. Item Lookup\n", "2. Display Inventory\n", 
 							 "3. Display Histogram\n", "4. Exit\n") << std::endl;
 	
-	
 	PromptMenuSelection();
 }
 
