@@ -1,10 +1,9 @@
 
 #include "menu.h"
-
-int main() 
+#include <iostream>
+int main()
 {
 	Menu menu;
 	menu.DisplayMenu();
-
-    return 0;
+	return 0;
 }

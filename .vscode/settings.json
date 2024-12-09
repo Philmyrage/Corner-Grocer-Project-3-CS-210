@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "ostream": "cpp"
+    },
+    "c_cpp_properties": {
+        "C_Cpp.default.cppStandard": "std::c++20"
+    }
+}

@@ -6,10 +6,11 @@
 void Menu::DisplayMenu()
 {
 	std::cout << std::format("{:#^{}}", " MENU OPTIONS ", 100) << std::endl;
-	std::cout << std::format("{:<15} {:<15} {:<15} {:<15}", 
-							 " 1. Item Lookup\n", "2. Display Inventory\n", 
-							 "3. Display Histogram\n", "4. Exit\n") << std::endl;
-	
+	std::cout << std::format("{:<15} {:<15} {:<15} {:<15}",
+							 " 1. Item Lookup\n", "2. Display Inventory\n",
+							 "3. Display Histogram\n", "4. Exit\n")
+			  << std::endl;
+
 	PromptMenuSelection();
 }
 
@@ -30,10 +31,9 @@ void Menu::PromptMenuSelection()
 		std::cout << "Invalid input. Please try again." << std::endl;
 		PromptMenuSelection();
 	}
-	
 }
 
-std::istream& operator>>(std::istream& is, EMenuSelection& selection)
+std::istream &operator>>(std::istream &is, EMenuSelection &selection)
 {
 	int value = 0;
 	is >> value;
@@ -58,7 +58,7 @@ std::istream& operator>>(std::istream& is, EMenuSelection& selection)
 	return is;
 }
 
-std::ostream& operator<<(std::ostream& os, EMenuSelection& selection)
+std::ostream &operator<<(std::ostream &os, EMenuSelection &selection)
 {
 	switch (selection)
 	{
