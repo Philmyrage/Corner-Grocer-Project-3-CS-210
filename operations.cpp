@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
+#include <format>
 
 void Operations::PerformOperation(EMenuSelection selection) const
 {
@@ -33,16 +34,16 @@ void Operations::ItemLookup() const
     std::string item = "";
     std::cout << "Enter the name of the item: ";
     getline(std::cin, item);
-    std::map<std::string, int> frequency = ItemFrequency(item);
+    MFrequencyMap frequency = ItemFrequency(item).first;
     std::cout << item << " " << frequency[item] << std::endl;
 }
 
-std::map<std::string, int> Operations::ItemFrequency(const std::string& item) const
+std::pair<MFrequencyMap, int> Operations::ItemFrequency(const std::string& item) const
 {
-    std::map<std::string, int> frequencyMap;
-    int frequency = 0;
+    MFrequencyMap frequencyMap;
+    int t_max = 0;
     std::ifstream file;
-    file.open(INPUT_FILE_NAME);
+    file.open(INPUT_FILE_PATH);
 
     if (file.is_open())
     {
@@ -50,6 +51,11 @@ std::map<std::string, int> Operations::ItemFrequency(const std::string& item) co
         std::string line;
         while (getline(file, line) && !file.eof())
         {
+            //Cache the max name length for formatting output..
+            if (line.size() > t_max)
+            {
+                t_max = line.size();
+            }
             //if the item is in the map already increment its frequency
             if (frequencyMap.contains(line))
             {
@@ -64,27 +70,33 @@ std::map<std::string, int> Operations::ItemFrequency(const std::string& item) co
     }
     else
     {
-		std::cout << "Unable to open " << INPUT_FILE_NAME << std::endl;
+		std::cout << "Unable to open " << INPUT_FILE_PATH << std::endl;
     }
-    
+
     //clost the file
     file.close();
 
+    std::pair<MFrequencyMap, int> temp;
+
     if (item != "")
     {
-        std::map <std::string, int> result;
+        MFrequencyMap result;
         result[item] = frequencyMap[item];
-        return result;
+        temp.first = result;
+        temp.second = item.size();
+        return temp;
     }
     else
     {
-        return frequencyMap;
+        temp.first = frequencyMap;
+        temp.second = t_max;
+        return temp;
     }
 }
 
 void Operations::PrintItemFrequencies() const
 {
-    std::map<std::string, int> frequencyMap = ItemFrequency("");
+    MFrequencyMap frequencyMap = ItemFrequency().first;
     //print the sales data...
     for(auto it = frequencyMap.begin(); it != frequencyMap.end(); it++)
 	{
@@ -94,7 +106,18 @@ void Operations::PrintItemFrequencies() const
 
 void Operations::DisplayHistogram() const
 {
-    std::cout << "Display histogram not implemented" << std::endl;
+	//get the frequency map from data file
+    MFrequencyMap frequencyMap = ItemFrequency().first;
+    //loop the map print the value of the key as the box, and print '*' for the frequency
+    //for (auto it : frequencyMap)
+    //{
+    //    for (int i = 0; i <= it.second; ++i)
+    //    {
+    //        std::cout << std::format("{:^{}}","*") << std::endl;
+    //    }
+    //    std::cout << std::format(it.first + " ");
+    //}
+    //std::cout << std::endl;
 }
 
 void Operations::Exit() const

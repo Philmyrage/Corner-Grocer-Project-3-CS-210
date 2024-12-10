@@ -11,6 +11,11 @@
  * @author Phillip Wood
  * @date 12/7/2024
  */
+
+
+ //defining frequencymap type so syntax is much simpliar.
+ typedef std::map<std::string, int> MFrequencyMap;
+
 class Operations
 {
 public:
@@ -27,8 +32,7 @@ protected:
 
 private:
     //** The input file name */
-    const std::string INPUT_FILE_NAME = "frequency.dat";
-    
+    const std::string INPUT_FILE_PATH = "frequency.dat";
 
     /**
      * @brief prints the item name and its frequency.
@@ -39,11 +43,13 @@ private:
      /**
       * @details gets the frequency of the item given by the user
       * @param item is optional and is the name of the item the user searches for
-      * in item lookup operation.
+      * in item lookup operation. Leave blank to get all items.
+      * 
+      * @param OUTmaxNameLength, an out parameter for formatting histogram output..
       * 
       * \returns a map of items and their frequencies
       */
-     std::map<std::string, int> ItemFrequency(const std::string& item = "") const;
+     std::pair<MFrequencyMap, int> ItemFrequency(const std::string& item = "") const;
 
     /**
      * @brief Prints all items and their frequencies in the inventory.
