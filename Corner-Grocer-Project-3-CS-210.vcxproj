@@ -24,8 +24,9 @@
     <ClCompile Include="operations.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="menu.h" />
-    <ClInclude Include="operations.h" />
+    <ClInclude Include="EMenuSelection.hpp" />
+    <ClInclude Include="menu.hpp" />
+    <ClInclude Include="operations.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

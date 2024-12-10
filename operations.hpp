@@ -1,5 +1,7 @@
 #pragma once
 
+#include "EMenuSelection.hpp"
+
 /**
  * @headerfile operations.h
  * @brief Header file for operations.cpp
@@ -7,9 +9,6 @@
  * @author Phillip Wood
  * @date 12/7/2024
  */
-
-#include "menu.h" // For EMenuSelection
-
 class Operations
 {
 public:

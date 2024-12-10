@@ -1,7 +1,8 @@
 
-#include "menu.h"
-#include "operations.h"
+#include "menu.hpp"
+#include "operations.hpp"
 #include <iostream>
+
 int main()
 {
 	Menu menu;

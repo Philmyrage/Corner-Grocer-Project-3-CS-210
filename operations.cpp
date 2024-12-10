@@ -1,5 +1,4 @@
-#include "operations.h"
-#include "menu.h"
+#include "operations.hpp"
 
 #include <string>
 #include <cstdlib>

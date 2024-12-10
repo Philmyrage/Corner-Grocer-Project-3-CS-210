@@ -1,12 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="menu.cpp" />
-    <ClCompile Include="operations.cpp" />
+    <ClCompile Include="menu.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="operations.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="menu.h" />
-    <ClInclude Include="operations.h" />
+    <ClInclude Include="menu.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="operations.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="EMenuSelection.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{e429a8fb-d8f1-447f-b545-d18a02a99efb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header">
+      <UniqueIdentifier>{0adc356b-779a-41d7-b705-6d9daf4558ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

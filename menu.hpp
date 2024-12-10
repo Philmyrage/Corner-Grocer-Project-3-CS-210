@@ -1,6 +1,9 @@
 #pragma once
 
+#include "EMenuSelection.hpp"
+
 #include <iosfwd>
+
 /**
  * @headerfile menu.h
  * @brief This file contains the menu class and enum class declarations for menu options
@@ -9,14 +12,6 @@
  * @author Phillip Wood
  * @date 12/7/2024
  */
-enum class EMenuSelection
-{
-	None = 0,
-	ItemLookup = 1,
-	DisplayInventory = 2,
-	DisplayHistogram = 3,
-	Exit = 4,
-};
 
 class Menu
 {
