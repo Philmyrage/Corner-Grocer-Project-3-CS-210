@@ -41,15 +41,14 @@ private:
      void ItemLookup() const;
 
      /**
-      * @details gets the frequency of the item given by the user
+      * @details gets the frequency of the item given by the user also finds the max name length.
       * @param item is optional and is the name of the item the user searches for
       * in item lookup operation. Leave blank to get all items.
       * 
-      * @param OUTmaxNameLength, an out parameter for formatting histogram output..
       * 
-      * \returns a map of items and their frequencies
+      * \returns a pair first is map and second is int which represents the maxnamelength.
       */
-     std::pair<MFrequencyMap, int> ItemFrequency(const std::string& item = "") const;
+     std::pair<MFrequencyMap, int> ItemFrequencyAndMaxLength(const std::string& item = "") const;
 
     /**
      * @brief Prints all items and their frequencies in the inventory.

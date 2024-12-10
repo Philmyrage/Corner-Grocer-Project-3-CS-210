@@ -34,11 +34,11 @@ void Operations::ItemLookup() const
     std::string item = "";
     std::cout << "Enter the name of the item: ";
     getline(std::cin, item);
-    MFrequencyMap frequency = ItemFrequency(item).first;
+    MFrequencyMap frequency = ItemFrequencyAndMaxLength(item).first;
     std::cout << item << " " << frequency[item] << std::endl;
 }
 
-std::pair<MFrequencyMap, int> Operations::ItemFrequency(const std::string& item) const
+std::pair<MFrequencyMap, int> Operations::ItemFrequencyAndMaxLength(const std::string& item) const
 {
     MFrequencyMap frequencyMap;
     int t_max = 0;
@@ -96,7 +96,7 @@ std::pair<MFrequencyMap, int> Operations::ItemFrequency(const std::string& item)
 
 void Operations::PrintItemFrequencies() const
 {
-    MFrequencyMap frequencyMap = ItemFrequency().first;
+    MFrequencyMap frequencyMap = ItemFrequencyAndMaxLength().first;
     //print the sales data...
     for(auto it = frequencyMap.begin(); it != frequencyMap.end(); it++)
 	{
@@ -107,7 +107,7 @@ void Operations::PrintItemFrequencies() const
 void Operations::DisplayHistogram() const
 {
 	//get the frequency map from data file
-    MFrequencyMap frequencyMap = ItemFrequency().first;
+    MFrequencyMap frequencyMap = ItemFrequencyAndMaxLength().first;
     //loop the map print the value of the key as the box, and print '*' for the frequency
     //for (auto it : frequencyMap)
     //{
