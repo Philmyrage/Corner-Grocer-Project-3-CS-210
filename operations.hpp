@@ -1,6 +1,8 @@
 #pragma once
 
 #include "EMenuSelection.hpp"
+#include <string>
+#include <map>
 
 /**
  * @headerfile operations.h
@@ -17,14 +19,31 @@ public:
     void PerformOperation(EMenuSelection selection) const;
 
 protected:
-private:
     /**
-     * @brief Looks up an item and returns the frequency of the item.
-     * @param name Name of the item to be looked up.
-     *
-     * @return frequency of the item
+     * @brief member variable to cache user input to print it back to the user...
+     * @warning This variable should only be changed by user input.
      */
-    int ItemLookup() const;
+     std::string item;
+
+private:
+    //** The input file name */
+    const std::string INPUT_FILE_NAME = "frequency.dat";
+    
+
+    /**
+     * @brief prints the item name and its frequency.
+     *
+     */
+     void ItemLookup() const;
+
+     /**
+      * @details gets the frequency of the item given by the user
+      * @param item is optional and is the name of the item the user searches for
+      * in item lookup operation.
+      * 
+      * \returns a map of items and their frequencies
+      */
+     std::map<std::string, int> ItemFrequency(const std::string& item = "") const;
 
     /**
      * @brief Prints all items and their frequencies in the inventory.
@@ -45,4 +64,6 @@ private:
      *
      */
     void Exit() const;
+
+    void StringToLower(std::string& OUT);
 };

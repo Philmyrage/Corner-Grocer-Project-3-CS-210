@@ -28,6 +28,9 @@
     <ClInclude Include="menu.hpp" />
     <ClInclude Include="operations.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="frequency.dat" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

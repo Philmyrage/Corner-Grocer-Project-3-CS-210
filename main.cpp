@@ -1,13 +1,17 @@
 
 #include "menu.hpp"
 #include "operations.hpp"
-#include <iostream>
 
 int main()
 {
 	Menu menu;
 	Operations operations;
-	menu.DisplayMenu();
-	operations.PerformOperation(menu.GetMenuSelection());
+	do
+	{
+		menu.DisplayMenu();
+		operations.PerformOperation(menu.GetMenuSelection());
+
+	}while(menu.GetMenuSelection() != EMenuSelection::Exit);
+
 	return 0;
 }

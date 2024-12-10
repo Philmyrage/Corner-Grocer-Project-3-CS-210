@@ -28,4 +28,7 @@
       <UniqueIdentifier>{0adc356b-779a-41d7-b705-6d9daf4558ee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="frequency.dat" />
+  </ItemGroup>
 </Project>

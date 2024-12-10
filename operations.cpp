@@ -3,6 +3,7 @@
 #include <string>
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 
 void Operations::PerformOperation(EMenuSelection selection) const
 {
@@ -25,11 +26,59 @@ void Operations::PerformOperation(EMenuSelection selection) const
     }
 }
 
-int Operations::ItemLookup() const
+void Operations::ItemLookup() const
 {
-    int count = 0;
-    std::cout << "Item lookup not implemented" << std::endl;
-    return count;
+    //clear the input buffer
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    //get the user input
+    std::string item = "";
+    std::cout << "Enter the name of the item: ";
+    getline(std::cin, item);
+    std::map<std::string, int> frequency = ItemFrequency(item);
+    std::cout << item << " " << frequency[item] << std::endl;
+}
+
+std::map<std::string, int> Operations::ItemFrequency(const std::string& item) const
+{
+    std::map<std::string, int> frequencyMap;
+    int frequency = 0;
+    std::ifstream file;
+    file.open(INPUT_FILE_NAME);
+
+    if (file.is_open())
+    {
+        //read the file
+        std::string line;
+        while (getline(file, line) && !file.eof())
+        {
+            //if the item is in the map already increment its frequency
+            if (frequencyMap.contains(line))
+            {
+				frequencyMap[line]++;
+            }
+            //else add it to the map
+            else
+            {
+				frequencyMap[line] = 1;
+            }
+        }
+    }
+    else
+    {
+		std::cout << "Unable to open " << INPUT_FILE_NAME << std::endl;
+    }
+
+    if (item != "")
+    {
+        std::map <std::string, int> result;
+        result[item] = frequencyMap[item];
+        return result;
+    }
+    else
+    {
+        return frequencyMap;
+    }
 }
 
 void Operations::DisplayInventory() const
@@ -44,5 +93,10 @@ void Operations::DisplayHistogram() const
 
 void Operations::Exit() const
 {
+    std::cout << "Goodbye" << std::endl;
     std::exit(0);
+}
+
+void Operations::StringToLower(std::string& OUT)
+{
 }
