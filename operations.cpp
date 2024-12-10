@@ -7,15 +7,13 @@
 
 void Operations::PerformOperation(EMenuSelection selection) const
 {
-    // TODO: Open FIle here and pass to functions that need it.
-    // it will keep me from having to open a file in every function, less code, and reduncancy.
     switch (selection)
     {
     case EMenuSelection::ItemLookup:
         this->ItemLookup();
         break;
     case EMenuSelection::DisplayInventory:
-        this->DisplayInventory();
+        this->PrintItemFrequencies();
         break;
     case EMenuSelection::DisplayHistogram:
         this->DisplayHistogram();
@@ -68,6 +66,9 @@ std::map<std::string, int> Operations::ItemFrequency(const std::string& item) co
     {
 		std::cout << "Unable to open " << INPUT_FILE_NAME << std::endl;
     }
+    
+    //clost the file
+    file.close();
 
     if (item != "")
     {
@@ -81,9 +82,14 @@ std::map<std::string, int> Operations::ItemFrequency(const std::string& item) co
     }
 }
 
-void Operations::DisplayInventory() const
+void Operations::PrintItemFrequencies() const
 {
-    std::cout << "Display inventory not implemented" << std::endl;
+    std::map<std::string, int> frequencyMap = ItemFrequency("");
+    //print the sales data...
+    for(auto it = frequencyMap.begin(); it != frequencyMap.end(); it++)
+	{
+		std::cout << it->first << " " << it->second << std::endl;
+	}
 }
 
 void Operations::DisplayHistogram() const

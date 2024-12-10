@@ -49,7 +49,7 @@ private:
      * @brief Prints all items and their frequencies in the inventory.
      *
      */
-    void DisplayInventory() const;
+    void PrintItemFrequencies() const;
 
     /**
      * @brief prints a histogram of the inventory.
