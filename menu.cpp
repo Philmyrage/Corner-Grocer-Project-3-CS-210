@@ -35,34 +35,25 @@ void Menu::PromptMenuSelection()
 
 std::istream &operator>>(std::istream &is, EMenuSelection &selection)
 {
+	//if input is within range ie. greater than 1 and less than or equal to enum max set selection.
+	//else set input stream state to fail.
+	int max = static_cast<int>(EMenuSelection::MAX_VALUE);
 	int value = 0;
 	is >> value;
-	switch (value)
+	if (value > 0 && value <= max)
 	{
-	case 1:
-		selection = EMenuSelection::ItemLookup;
-		break;
-	case 2:
-		selection = EMenuSelection::DisplayInventory;
-		break;
-	case 3:
-		selection = EMenuSelection::DisplayHistogram;
-		break;
-	case 4:
-		selection = EMenuSelection::InsertItem;
-		break;
-	case 5:
-		selection = EMenuSelection::Exit;
-		break;
-	default:
+		selection = static_cast<EMenuSelection>(value);
+	}
+	else
+	{
 		is.setstate(std::ios_base::failbit);
-		break;
 	}
 	return is;
 }
 
 std::ostream &operator<<(std::ostream &os, EMenuSelection &selection)
 {
+	
 	switch (selection)
 	{
 	case EMenuSelection::ItemLookup:
