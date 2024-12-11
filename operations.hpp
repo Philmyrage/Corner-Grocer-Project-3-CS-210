@@ -71,4 +71,17 @@ private:
      * \param OUT string needing to be mutated to remove all upper case letters.
      */
     void StringToLower(std::string& OUT) const;
+
+    /**
+     * @details This function checks for a current backup, if one doesn't exist, it creates one and writes 
+     * the contents of the current frequency map.
+     * 
+     */
+    void WriteToBackUpFile() const;
+
+    /**
+     * @details Lets the user input a new item and appends the input to end of the frequency.dat file...
+     * 
+     */
+    void InsertItem() const;
 };

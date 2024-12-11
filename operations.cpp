@@ -21,6 +21,9 @@ void Operations::PerformOperation(EMenuSelection selection) const
     case EMenuSelection::DisplayHistogram:
         this->DisplayHistogram();
         break;
+    case EMenuSelection::InsertItem:
+        this->InsertItem();
+        break;
     case EMenuSelection::Exit:
         this->Exit();
         break;
@@ -140,4 +143,15 @@ void Operations::Exit() const
 void Operations::StringToLower(std::string& OUT) const
 {
     std::transform(OUT.begin(), OUT.end(), OUT.begin(), [](unsigned char s){return std::tolower(s);});
+}
+
+void Operations::WriteToBackUpFile() const
+{
+    //check if backup exists
+
+}
+
+void Operations::InsertItem() const
+{
+    std::cout << "InsertItem is not Implemented." << std::endl;
 }

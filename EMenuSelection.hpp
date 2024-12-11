@@ -6,5 +6,6 @@ enum class EMenuSelection
 	ItemLookup = 1,
 	DisplayInventory = 2,
 	DisplayHistogram = 3,
-	Exit = 4,
+	InsertItem = 4,
+	Exit = 5
 };

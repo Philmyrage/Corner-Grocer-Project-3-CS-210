@@ -6,9 +6,9 @@
 void Menu::DisplayMenu()
 {
 	std::cout << std::format("{:#^{}}", " MENU OPTIONS ", 100) << std::endl;
-	std::cout << std::format("{:<15} {:<15} {:<15} {:<15}",
+	std::cout << std::format("{:<15} {:<15} {:<15} {:<15} {:<15}",
 							 " 1. Item Lookup\n", "2. Display Inventory\n",
-							 "3. Display Histogram\n", "4. Exit\n")
+							 "3. Display Histogram\n", "4. Insert Item\n", "5. Exit\n")
 			  << std::endl;
 
 	PromptMenuSelection();
@@ -49,6 +49,9 @@ std::istream &operator>>(std::istream &is, EMenuSelection &selection)
 		selection = EMenuSelection::DisplayHistogram;
 		break;
 	case 4:
+		selection = EMenuSelection::InsertItem;
+		break;
+	case 5:
 		selection = EMenuSelection::Exit;
 		break;
 	default:

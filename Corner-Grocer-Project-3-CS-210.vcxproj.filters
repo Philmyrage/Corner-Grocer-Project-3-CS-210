@@ -18,7 +18,9 @@
     <ClInclude Include="operations.hpp">
       <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="EMenuSelection.hpp" />
+    <ClInclude Include="EMenuSelection.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="source">
