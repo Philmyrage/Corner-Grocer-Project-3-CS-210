@@ -24,11 +24,6 @@ public:
     void PerformOperation(EMenuSelection selection) const;
 
 protected:
-    /**
-     * @brief member variable to cache user input to print it back to the user...
-     * @warning This variable should only be changed by user input.
-     */
-     std::string item;
 
 private:
     //** The input file name */
@@ -70,5 +65,10 @@ private:
      */
     void Exit() const;
 
-    void StringToLower(std::string& OUT);
+    /**
+     * @details used to make sure that the program is case insensitve.
+     * @warning this function may be const but mutates a variable passed as an out parameter, use caution when using.
+     * \param OUT string needing to be mutated to remove all upper case letters.
+     */
+    void StringToLower(std::string& OUT) const;
 };

@@ -5,6 +5,8 @@
 #include <iostream>
 #include <fstream>
 #include <format>
+#include <algorithm>
+#include <cctype>
 
 void Operations::PerformOperation(EMenuSelection selection) const
 {
@@ -34,6 +36,7 @@ void Operations::ItemLookup() const
     std::string item = "";
     std::cout << "Enter the name of the item: ";
     getline(std::cin, item);
+    StringToLower(item);
     MFrequencyMap frequency = ItemFrequencyAndMaxLength(item).first;
     std::cout << item << " " << frequency[item] << std::endl;
 }
@@ -51,6 +54,9 @@ std::pair<MFrequencyMap, int> Operations::ItemFrequencyAndMaxLength(const std::s
         std::string line;
         while (getline(file, line) && !file.eof())
         {
+            //conver the string to lowercase...
+            StringToLower(line);
+
             //Cache the max name length for formatting output..
             if (line.size() > t_max)
             {
@@ -131,6 +137,7 @@ void Operations::Exit() const
     std::exit(0);
 }
 
-void Operations::StringToLower(std::string& OUT)
+void Operations::StringToLower(std::string& OUT) const
 {
+    std::transform(OUT.begin(), OUT.end(), OUT.begin(), [](unsigned char s){return std::tolower(s);});
 }
