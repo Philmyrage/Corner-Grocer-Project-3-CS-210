@@ -107,17 +107,22 @@ void Operations::PrintItemFrequencies() const
 void Operations::DisplayHistogram() const
 {
 	//get the frequency map from data file
-    MFrequencyMap frequencyMap = ItemFrequencyAndMaxLength().first;
+    std::pair<MFrequencyMap, int> t = ItemFrequencyAndMaxLength();
+    MFrequencyMap frequencyMap = t.first;
+    int maxLength = t.second;
     //loop the map print the value of the key as the box, and print '*' for the frequency
-    //for (auto it : frequencyMap)
-    //{
-    //    for (int i = 0; i <= it.second; ++i)
-    //    {
-    //        std::cout << std::format("{:^{}}","*") << std::endl;
-    //    }
-    //    std::cout << std::format(it.first + " ");
-    //}
-    //std::cout << std::endl;
+    for (auto it : frequencyMap)
+    {
+        std::string fre = "";
+        //std::cout << std::format("{: ^}", "|", 100);
+        for (int i = 0; i < it.second; ++i)
+        {
+            fre += "*"; 
+        }
+        std::cout << std::format("{:<{}}{:>}{:<{}}", it.first, maxLength, "|", fre, maxLength, maxLength);
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
 }
 
 void Operations::Exit() const
