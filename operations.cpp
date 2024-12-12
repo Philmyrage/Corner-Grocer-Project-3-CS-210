@@ -10,6 +10,9 @@
 
 void Operations::PerformOperation(EMenuSelection selection) const
 {
+    //Backup ItemsPurchased data before any operations.
+    WriteToBackUpFile(ItemFrequencyAndMaxLength().first);
+
     switch (selection)
     {
     case EMenuSelection::ItemLookup:
@@ -57,7 +60,7 @@ std::pair<MFrequencyMap, int> Operations::ItemFrequencyAndMaxLength(const std::s
         std::string line;
         while (getline(file, line) && !file.eof())
         {
-            //conver the string to lowercase...
+            //convert the string to lowercase...
             StringToLower(line);
 
             //Cache the max name length for formatting output..
@@ -82,7 +85,7 @@ std::pair<MFrequencyMap, int> Operations::ItemFrequencyAndMaxLength(const std::s
 		std::cout << "Unable to open " << INPUT_FILE_PATH << std::endl;
     }
 
-    //clost the file
+    //close the file
     file.close();
 
     std::pair<MFrequencyMap, int> temp;
@@ -123,7 +126,6 @@ void Operations::DisplayHistogram() const
     for (auto it : frequencyMap)
     {
         std::string fre = "";
-        //std::cout << std::format("{: ^}", "|", 100);
         for (int i = 0; i < it.second; ++i)
         {
             fre += "*"; 
@@ -136,6 +138,9 @@ void Operations::DisplayHistogram() const
 
 void Operations::Exit() const
 {
+    //Write the current contents of the Frequency map to a back up file before exiting the program.
+    WriteToBackUpFile(ItemFrequencyAndMaxLength().first);
+
     std::cout << "Goodbye" << std::endl;
     std::exit(0);
 }
@@ -145,10 +150,24 @@ void Operations::StringToLower(std::string& OUT) const
     std::transform(OUT.begin(), OUT.end(), OUT.begin(), [](unsigned char s){return std::tolower(s);});
 }
 
-void Operations::WriteToBackUpFile() const
+void Operations::WriteToBackUpFile(const MFrequencyMap& data) const
 {
-    //check if backup exists
+    std::ofstream outFile;
+    outFile.open(BACKUP_FILE_PATH);
 
+    if (outFile.is_open())
+    {
+        for (auto it : data)
+        {
+            outFile << it.first << " " << it.second << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "Program Failed to open " << BACKUP_FILE_PATH << std::endl;
+    }
+
+    outFile.close();
 }
 
 void Operations::InsertItem() const

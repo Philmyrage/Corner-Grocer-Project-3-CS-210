@@ -29,7 +29,7 @@
     <ClInclude Include="operations.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="frequency.dat" />
+    <None Include="ItemsPurchased.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

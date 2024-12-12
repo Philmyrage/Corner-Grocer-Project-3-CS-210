@@ -27,7 +27,10 @@ protected:
 
 private:
     //** The input file name */
-    const std::string INPUT_FILE_PATH = "frequency.dat";
+    const std::string INPUT_FILE_PATH = "ItemsPurchased.txt";
+
+    //** The backup data file path*/
+    const std::string BACKUP_FILE_PATH = "frequency.dat";
 
     /**
      * @brief prints the item name and its frequency.
@@ -66,7 +69,7 @@ private:
     void Exit() const;
 
     /**
-     * @details used to make sure that the program is case insensitve.
+     * @details used to make sure that the program is case insensitive.
      * @warning this function may be const but mutates a variable passed as an out parameter, use caution when using.
      * \param OUT string needing to be mutated to remove all upper case letters.
      */
@@ -77,7 +80,7 @@ private:
      * the contents of the current frequency map.
      * 
      */
-    void WriteToBackUpFile() const;
+    void WriteToBackUpFile(const MFrequencyMap& data) const;
 
     /**
      * @details Lets the user input a new item and appends the input to end of the frequency.dat file...
