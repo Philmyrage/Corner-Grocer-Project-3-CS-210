@@ -260,12 +260,22 @@ void Operations::RemoveItem() const
 
     try
     {
+        //set the exceptions we want to catch.
+        std::cin.exceptions(std::ios_base::failbit);
+
         std::cout << "Enter Quantity: ";
         std::cin >> quantity;
+        if (quantity <= 0)
+        {
+            std::cin.setstate(std::ios_base::failbit);
+        }
 
     }
     catch(const std::ios_base::failure& e){
-        std::cout << "Invalid Quantity Entered, Defaulting to one Item." << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        std::cout << "Invalid Quantity Entered, Defaulting to one Item.\n" << std::endl;
         quantity = 1;
     }
 
