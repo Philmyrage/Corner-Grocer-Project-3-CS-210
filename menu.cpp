@@ -37,6 +37,7 @@ void Menu::PromptMenuSelection()
 		std::cout << "Invalid input. Please try again." << std::endl;
 		PromptMenuSelection();
 	}
+	std::cout << std::endl;
 }
 
 std::istream &operator>>(std::istream &is, EMenuSelection &selection)

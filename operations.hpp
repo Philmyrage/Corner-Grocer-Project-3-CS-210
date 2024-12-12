@@ -27,7 +27,7 @@ class Operations
 public:
     // Public function that takes the menuselction as a parameter
     // and conducts the desired operation.
-    void PerformOperation(EMenuSelection selection) const;
+    void PerformOperation(const EMenuSelection& selection) const;
 
 protected:
 

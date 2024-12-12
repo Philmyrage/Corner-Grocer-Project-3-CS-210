@@ -15,7 +15,7 @@
 #include <cctype>
 #include <exception>
 
-void Operations::PerformOperation(EMenuSelection selection) const
+void Operations::PerformOperation(const EMenuSelection& selection) const
 {
     //Backup ItemsPurchased data before any operations.
     WriteToBackUpFile(ItemFrequencyAndMaxLength().first);
@@ -41,6 +41,7 @@ void Operations::PerformOperation(EMenuSelection selection) const
         this->Exit();
         break;
     }
+    std::cout << std::endl;
 }
 
 void Operations::ItemLookup() const
