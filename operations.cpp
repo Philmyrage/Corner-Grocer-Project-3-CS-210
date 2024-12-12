@@ -27,10 +27,10 @@ void Operations::PerformOperation(EMenuSelection selection) const
         this->DisplayHistogram();
         break;
     case EMenuSelection::InsertItem:
-        this->InsertItem();
+        this->InsertItems();
         break;
     case EMenuSelection::RemoveItem:
-        this->RemoveItem();
+        this->RemoveItems();
         break;
     case EMenuSelection::Exit:
         this->Exit();
@@ -172,7 +172,7 @@ void Operations::WriteToBackUpFile(const MFrequencyMap& data) const
     outFile.close();
 }
 
-void Operations::InsertItem() const
+void Operations::InsertItems() const
 {
     std::ifstream inFile;
     std::ofstream outFile;
@@ -195,6 +195,7 @@ void Operations::InsertItem() const
     //close the file in preparation to open in output file.
     inFile.close();
 
+
     std::cout << "Enter Item Name: ";
     std::string input = "";
 
@@ -203,10 +204,38 @@ void Operations::InsertItem() const
     std::cin.clear();
     getline(std::cin, input);
     
+    int quantity = 0;
+
+    try
+    {
+        //set the exceptions we want to catch.
+        std::cin.exceptions(std::ios_base::failbit);
+
+        std::cout << "Enter Quantity: ";
+        std::cin >> quantity;
+        if (quantity <= 0)
+        {
+            std::cin.setstate(std::ios_base::failbit);
+        }
+
+    }
+    catch (const std::ios_base::failure& e)
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        std::cout << "Invalid Quantity Entered, Defaulting to one Item.\n" << std::endl;
+        quantity = 1;
+    }
+
     //set the input to lowercase
     StringToLower(input);
-    //save it to the vector
-    cache.resize(cache.size() + 1, input);
+    for (int i = 1; i <= quantity; i++)
+    {
+        //save it to the vector
+        cache.resize(cache.size() + 1, input);
+
+    }
 
     //Write the vector to the itemsPurchased.txt
     outFile.open(INPUT_FILE_PATH);
@@ -226,7 +255,7 @@ void Operations::InsertItem() const
     WriteToBackUpFile(ItemFrequencyAndMaxLength().first);
 }
 
-void Operations::RemoveItem() const
+void Operations::RemoveItems() const
 {
     std::ifstream inFile;
     std::ofstream outFile;
