@@ -1,5 +1,6 @@
 #include "operations.hpp"
 
+#include <vector>
 #include <string>
 #include <cstdlib>
 #include <iostream>
@@ -138,9 +139,6 @@ void Operations::DisplayHistogram() const
 
 void Operations::Exit() const
 {
-    //Write the current contents of the Frequency map to a back up file before exiting the program.
-    WriteToBackUpFile(ItemFrequencyAndMaxLength().first);
-
     std::cout << "Goodbye" << std::endl;
     std::exit(0);
 }
@@ -172,5 +170,53 @@ void Operations::WriteToBackUpFile(const MFrequencyMap& data) const
 
 void Operations::InsertItem() const
 {
-    std::cout << "InsertItem is not Implemented." << std::endl;
+    std::ifstream inFile;
+    std::ofstream outFile;
+    inFile.open(INPUT_FILE_PATH);
+    //save the contents of the current itemsPurchased file
+    std::vector<std::string> cache;
+    if (inFile.is_open())
+    {
+        std::string line = "";
+        while (inFile >> line)
+        {
+            cache.resize(cache.size() + 1, line);
+        }
+    }
+    else
+    {
+        std::cout << "Failed to open " << INPUT_FILE_PATH << std::endl;
+    }
+    //close the file in preparation to open in output file.
+    inFile.close();
+
+    std::cout << "Enter Item Name: ";
+    std::string input = "";
+
+    //clear input buffer
+    std::cin.ignore();
+    std::cin.clear();
+    getline(std::cin, input);
+    
+    //set the input to lowercase
+    StringToLower(input);
+    //save it to the vector
+    cache.resize(cache.size() + 1, input);
+
+    //Write the vector to the itemsPurchased.txt
+    outFile.open(INPUT_FILE_PATH);
+    if (outFile.is_open())
+    {
+        for (auto line : cache)
+        {
+            outFile << line << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "Failed to open " << INPUT_FILE_PATH << " for writing..." << std::endl;
+    }
+
+    //back up the new data..
+    WriteToBackUpFile(ItemFrequencyAndMaxLength().first);
 }
