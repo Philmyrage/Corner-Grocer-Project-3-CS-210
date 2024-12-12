@@ -7,6 +7,7 @@ enum class EMenuSelection
 	DisplayInventory = 2,
 	DisplayHistogram = 3,
 	InsertItem = 4,
-	Exit = 5, //Exit should always be max when adding to options.
+	RemoveItem = 5,
+	Exit = 6, //Exit should always be max when adding to options.
 	MAX_VALUE = Exit
 };

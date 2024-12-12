@@ -83,8 +83,13 @@ private:
     void WriteToBackUpFile(const MFrequencyMap& data) const;
 
     /**
-     * @details Lets the user input a new item and appends the input to end of the frequency.dat file...
+     * @details Lets the user input a new item and appends the input to end of the items purchased file...
      * 
      */
     void InsertItem() const;
+
+    /**
+    * @details Lets the user remove a quantity of chosen items from the file
+    */
+    void RemoveItem() const;
 };

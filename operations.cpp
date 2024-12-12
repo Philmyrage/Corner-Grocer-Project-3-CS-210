@@ -8,6 +8,7 @@
 #include <format>
 #include <algorithm>
 #include <cctype>
+#include <exception>
 
 void Operations::PerformOperation(EMenuSelection selection) const
 {
@@ -27,6 +28,9 @@ void Operations::PerformOperation(EMenuSelection selection) const
         break;
     case EMenuSelection::InsertItem:
         this->InsertItem();
+        break;
+    case EMenuSelection::RemoveItem:
+        this->RemoveItem();
         break;
     case EMenuSelection::Exit:
         this->Exit();
@@ -180,6 +184,7 @@ void Operations::InsertItem() const
         std::string line = "";
         while (inFile >> line)
         {
+            StringToLower(line);
             cache.resize(cache.size() + 1, line);
         }
     }
@@ -202,6 +207,81 @@ void Operations::InsertItem() const
     StringToLower(input);
     //save it to the vector
     cache.resize(cache.size() + 1, input);
+
+    //Write the vector to the itemsPurchased.txt
+    outFile.open(INPUT_FILE_PATH);
+    if (outFile.is_open())
+    {
+        for (auto line : cache)
+        {
+            outFile << line << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "Failed to open " << INPUT_FILE_PATH << " for writing..." << std::endl;
+    }
+
+    //back up the new data..
+    WriteToBackUpFile(ItemFrequencyAndMaxLength().first);
+}
+
+void Operations::RemoveItem() const
+{
+    std::ifstream inFile;
+    std::ofstream outFile;
+    inFile.open(INPUT_FILE_PATH);
+    //save the contents of the current itemsPurchased file
+    std::vector<std::string> cache;
+    if (inFile.is_open())
+    {
+        std::string line = "";
+        while (inFile >> line)
+        {
+            StringToLower(line);
+            cache.resize(cache.size() + 1, line);
+        }
+    }
+    else
+    {
+        std::cout << "Failed to open " << INPUT_FILE_PATH << std::endl;
+    }
+    //close the file in preparation to open in output file.
+    inFile.close();
+
+    std::cout << "Enter Item Name: ";
+    std::string name = "";
+    int quantity = 0;
+
+    //clear input buffer
+    std::cin.ignore();
+    std::cin.clear();
+    getline(std::cin, name);
+
+    try
+    {
+        std::cout << "Enter Quantity: ";
+        std::cin >> quantity;
+
+    }
+    catch(const std::ios_base::failure& e){
+        std::cout << "Invalid Quantity Entered, Defaulting to one Item." << std::endl;
+        quantity = 1;
+    }
+
+    //set the input to lowercase
+    StringToLower(name);
+
+    int count = 1;
+    //remove the name of item for given quantity from the vector...
+    for (int i = 0; i < cache.size(); ++i)
+    {
+        if (cache.at(i) == name && count <= quantity)
+        {
+            cache.erase(cache.begin() + i);
+            count++;
+        }
+    }
 
     //Write the vector to the itemsPurchased.txt
     outFile.open(INPUT_FILE_PATH);
