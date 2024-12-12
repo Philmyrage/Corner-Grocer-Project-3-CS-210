@@ -1,3 +1,9 @@
+/*
+    Created By: Phillip Wood
+    Date: 12/12/2024
+    GitHub: https://github.com/Philmyrage/Corner-Grocer-Project-3-CS-210
+*/
+
 #pragma once
 
 #include "EMenuSelection.hpp"
